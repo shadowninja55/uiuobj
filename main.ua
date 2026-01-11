@@ -1,12 +1,13 @@
 # Experimental!
 I ~ "gh: Marcos-cat/iris"
+M ~ "gh: Omnikar/uiua-math"
 
-~ {Rot Pos Model}
-Size       ← 1500
-DotSize    ← 4
-TextSize   ← 30
-ZoomSpeed  ← 5
-OrbitSpeed ← 3
+~ {Angles Camera Model}
+Size        ← 1500
+DotSize     ← 4
+TextSize    ← 30
+ZoomSpeed   ← 5
+RotateSpeed ← 0.3
 Load ← (
   ⍜&fo&rl□
   ▽⊸≡◇(≍"v "⬚@ ↙₂)
@@ -14,24 +15,22 @@ Load ← (
   -÷2+⊸≡⊃/↧/↥
   ÷⊸(/↥⌵♭)
 )
-Zoom  ← ⍜⊣(+ ×ZoomSpeed×I~Window~Dt I~Mouse~Scroll)
-Orbit ← - ×OrbitSpeed×I~Window~Dt ⊙◌°ℂ/+I~Key~WASD 0
+Zoom   ← ⍜⊣(+ ×ZoomSpeed×I~Window~Dt I~Mouse~Scroll)
+Rotate ← - ×RotateSpeed×I~Window~Dt I~Transform~Coords
 Project ← (
   ▽⊃(>0⊣|ℂ⊙¯∩⌟˜÷°⊟₃)
   -÷2DotSize×Size÷2+˙ℂ1
 )
-Ry  ← ↯3_3⊃[∂∿|0|∿|0|1|0|¯∿|0|∂∿]
-Mul ← ≡/+×⌟
 
 ⍤"provide path to .obj file as an argument"≥2⧻&args
-New 0 ⌝↘2¤×4/↧⊸⊣ Load ⊏1&args
+New 0_0 ⊂0_0×4/↧⊸⊣ Load ⊏1&args
 
 I~Open ˙ℂSize "uiuobj"
 ◌I~Loop!(
-  ⍜Pos Zoom
-  ⍜Rot Orbit
+  ⍜Camera Zoom
+  ⍜Angles I~Mouse~Drag‼I~Mouse~Left Rotate
   I~Draw~Background I~Color~Base
-  Project -⊙(Mul Ry)⊸⊃(Pos|Rot|Model)
+  Project -⊸⊃Camera(⍜⊙⍉M~QRot /M~Qqp⇌ M~RQuat⊙[0_1_0 1_0_0]⊃Angles Model)
   I~Draw~Square I~Color~Text DotSize
-  I~Draw~Text I~Color~Green TextSize ˙ℂ30 $"a/d to rotate, scroll to zoom, esc to quit"
+  I~Draw~Text I~Color~Green TextSize ˙ℂ30 $"drag to rotate, scroll to zoom, esc to quit"
 )
