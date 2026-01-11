@@ -30,7 +30,7 @@ I~Open ˙ℂSize "uiuobj"
   ⍜Camera Zoom
   ⍜Angles I~Mouse~Drag‼I~Mouse~Left Rotate
   I~Draw~Background I~Color~Base
-  Project -⊸⊃Camera(⍜⊙⍉M~QRot /M~Qqp⇌ M~RQuat⊙[0_1_0 1_0_0]⊃Angles Model)
+  Project -⊸⊃Camera(⧋M~QRot /M~Qqp⇌ M~RQuat⊙[0_1_0 1_0_0]⊃Angles Model)
   I~Draw~Square I~Color~Text DotSize
   I~Draw~Text I~Color~Green TextSize ˙ℂ30 $"drag to rotate, scroll to zoom, esc to quit"
 )
